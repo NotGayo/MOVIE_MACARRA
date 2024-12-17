@@ -7,10 +7,14 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class IU_ACCESO extends JFrame {
-
+	private JButton logInButton;
 	private JPanel contentPane;
+	private JButton registerButton;
+    private Controler controler = null;
 
 	/**
 	 * Launch the application.
@@ -41,11 +45,48 @@ public class IU_ACCESO extends JFrame {
 
 		setContentPane(contentPane);
 		
-		JButton logInButton = new JButton("LOG IN");
+		logInButton = new JButton("LOG IN");
 		contentPane.add(logInButton);
+        this.logInButton.addActionListener(this.getControler());
+
 		
-		JButton registerButton = new JButton("REGISTER");
+		registerButton = new JButton("REGISTER");
 		contentPane.add(registerButton);
+        this.registerButton.addActionListener(this.getControler());
+
+	}
+	
+	public void closeWindow() {
+		this.dispose();
+	}
+	
+	private Controler getControler() {
+        if (this.controler == null) {
+            this.controler = new Controler();
+        }
+
+        return this.controler;
+    }
+	
+	private class Controler implements ActionListener {
+        private Controler() {
+        }
+        
+        public void actionPerformed(ActionEvent e) {
+        	if (e.getSource().equals(logInButton)) {
+        		//iniciar una ventana de login
+        		closeWindow();
+        		IU_LOGIN iulg = new IU_LOGIN();
+        		iulg.run();
+        	}
+        	
+        	if (e.getSource().equals(registerButton)) {
+        		//iniciar una ventana de registro
+        		closeWindow();
+        		IU_REGISTRO iur = new IU_REGISTRO();
+        		iur.run();
+        	}
+        }
 	}
 
 }
