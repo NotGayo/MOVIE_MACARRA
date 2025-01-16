@@ -15,7 +15,13 @@ public class Usuario {
     private List<Pelicula> susEliminadasP;
     private List<Usuario> susEliminadosU;
     private List<Usuario> susAceptadosU;
-
+    private Usuario adminAceptador;
+    
+    
+    public boolean esValidoUsuario() {
+    	return this.adminAceptador != null ;
+    }
+    
     // Getters y setters
     public int getCodUsuario() {
         return codUsuario;
