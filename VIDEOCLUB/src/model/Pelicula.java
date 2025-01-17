@@ -25,4 +25,16 @@ public class Pelicula {
     }
     // Getters y setters
     // Similar a los anteriores, se deben implementar para todos los atributos
+    public String getTitulo() {
+    	return this.titulo;
+    }
+	public String getDirector() {
+		return this.director;
+	}
+	public int getAnio() {
+		return this.anio;
+	}
+	public int getCodPeli() {
+		return this.codPelicula;
+	}
 }

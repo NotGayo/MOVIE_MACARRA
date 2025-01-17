@@ -1,22 +1,30 @@
 package view;
 
 import java.awt.EventQueue;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import java.awt.BorderLayout;
 import javax.swing.JList;
 import model.Pelicula;
+import model.Valoracion;
 import controller.GestorPelis;
+import controller.GestorValoraciones;
 
 public class IU_BUSCARPELI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JPanel panel;
-	private JList<Pelicula> list;
+	private JList<String> list;
 	private GestorPelis gestorPeliculas; // Gestor de películas
 
 	// Método principal para ejecutar la aplicación
@@ -43,25 +51,47 @@ public class IU_BUSCARPELI extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		contentPane.add(getPanel(), BorderLayout.CENTER);
 
-		gestorPeliculas = new GestorPelis(); // Inicializa el gestor de películas
+		gestorPeliculas = GestorPelis.getGPelis(); // Inicializa el gestor de películas
 		cargarPeliculas(); // Cargar algunas películas de ejemplo
 		actualizarLista(); // Actualiza la JList con las películas
+		agregarListSelectionListener();
 	}
 
 	// Método para cargar algunas películas de ejemplo
 	private void cargarPeliculas() {
 		//gestorValoraciones.anadirValoracion(...)
-		//valoraciones = gestorValoraciones.getGV().getListaVal()
-		gestorPeliculas.anadirPelicula(new Pelicula(1,"El Padrino", "Francis Ford Coppola","asier", 1972,"fvh","dfghjkl", valoraciones ));
+		List<Valoracion> valoraciones = GestorValoraciones.getGV().getListaVal();
+		gestorPeliculas.anadirPelicula(new Pelicula(1,"El Padrino", "Francis Ford Coppola","asier", 1972,"fvh","dfghjkl", valoraciones));
 	}
 
 	// Método para actualizar la lista con las películas
 	private void actualizarLista() {
-		DefaultListModel<Pelicula> modelo = new DefaultListModel<>(); // Modelo para la lista
-		for (Pelicula pelicula : gestorPeliculas.getPeliculas()) {
-			modelo.addElement(pelicula); // Agregar las películas al modelo
+		Iterator<Pelicula> iterador = gestorPeliculas.getIterador();
+		DefaultListModel<String> modelo = new DefaultListModel<>(); // Modelo para la lista
+		
+		while (iterador.hasNext()) {
+			Pelicula pelicula = iterador.next();
+			modelo.addElement(pelicula.getTitulo());
 		}
 		list.setModel(modelo); // Establecer el modelo en la JList
+	}
+	
+	private void agregarListSelectionListener() {
+		list.addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				if (!e.getValueIsAdjusting()) { // Evitar manejar eventos duplicados
+					String titulo = list.getSelectedValue(); // Obtener el título seleccionado
+					Pelicula pelicula = gestorPeliculas.buscarPeliculaPorTitulo(titulo); // Buscar la película
+
+					if (pelicula != null) {
+						// Abrir la ventana IU_ALQUILAR con la película seleccionada
+						IU_ALQUILAR ventanaAlquilar = new IU_ALQUILAR(pelicula);
+						ventanaAlquilar.setVisible(true);
+					}
+				}
+			}
+		});
 	}
 
 	// Panel contenedor de la JList
@@ -75,7 +105,7 @@ public class IU_BUSCARPELI extends JFrame {
 	}
 
 	// Método para obtener la JList
-	private JList<Pelicula> getList() {
+	private JList<String> getList() {
 		if (list == null) {
 			list = new JList<>();
 		}

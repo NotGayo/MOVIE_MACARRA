@@ -1,7 +1,9 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
+import model.Alquiler;
 import model.Pelicula;
 
 public class GestorPelis {
@@ -20,4 +22,20 @@ public class GestorPelis {
 	public void anadirPelicula(Pelicula pelicula) {
 		this.lista.add(pelicula);
 	}
+	
+	public Iterator<Pelicula> getIterador(){
+		return this.lista.iterator();
+	}
+	
+	public Pelicula buscarPeliculaPorTitulo(String titulo) {
+		Iterator<Pelicula> it = GestorPelis.getGPelis().getIterador();
+		while (it.hasNext()) {
+			Pelicula pelicula = it.next();
+			if (pelicula.getTitulo().equals(titulo)) {
+				return pelicula;
+			}
+		}
+		return null;
+	}
+
 }

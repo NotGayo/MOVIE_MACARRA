@@ -25,8 +25,7 @@ public class GestorAlquileres {
 	}
 	
 	public Alquiler crearAlquiler(Usuario usuario, Pelicula pelicula) {
-		Alquiler alquiler = null;
-		return alquiler.crearAlquiler(usuario,pelicula); 
+		return Alquiler.crearAlquiler(usuario,pelicula); 
 	}
 	
 	public void anadirAlquiler(Alquiler alquiler) {

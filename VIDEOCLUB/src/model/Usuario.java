@@ -118,4 +118,15 @@ public class Usuario {
     public void setSusAceptadosU(List<Usuario> susAceptadosU) {
         this.susAceptadosU = susAceptadosU;
     }
+    
+    public boolean laHeAlquilado(int codPelicula) {
+    	boolean alquilada = false;
+    	for (Alquiler al : this.susAlquileres) {
+    		if (al.getPelicula().getCodPeli() == codPelicula) {
+    			alquilada = true;
+    			break;
+    		}
+    	}
+    	return alquilada;
+    }
 }

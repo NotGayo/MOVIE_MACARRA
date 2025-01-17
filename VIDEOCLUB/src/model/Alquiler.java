@@ -39,7 +39,7 @@ public class Alquiler {
      this.usuario = usuario;
  }
  
- public Alquiler crearAlquiler(Usuario usuario, Pelicula pelicula) {
+ public static Alquiler crearAlquiler(Usuario usuario, Pelicula pelicula) {
 	 Date fechaAlquiler = new Date();
 	 Alquiler al = new Alquiler(fechaAlquiler, pelicula, usuario);
 	 return al;
