@@ -1,5 +1,9 @@
 package controller;
 
+
+
+import java.sql.Date;
+
 import BBDD.DatabaseConnection;
 import BBDD.DatabaseInsertion;
 import BBDD.DatabaseSetup;
@@ -10,7 +14,7 @@ public class VideoClub {
 	
 	private VideoClub() {
 		DatabaseSetup.createTables();
-		DatabaseInsertion.insertarUsuario(0, "first", "first@firstmai.first", "first123", "no");
+		DatabaseInsertion.insertarUsuario("first", "first@firstmai.first", "first123",new Date(1,1,1));
 	}
 	
 	public static VideoClub getVC() {

@@ -1,19 +1,19 @@
 package BBDD;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 
 public class DatabaseInsertion {
-    public static void insertarUsuario(int codUs, String nombre, String correo, String contrasena, String esad) {
-        String sql = "INSERT INTO Usuario(codigoUsuario, nombre, correo, contrasena, esadmin) VALUES(?, ?, ?, ?, ?)";
+    public static void insertarUsuario(String nombre, String correo, String contrasena,Date fechaN) {
+        String sql = "INSERT INTO Usuario(nombre, correo, contrasena, fechaNacimiento) VALUES(?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnection.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, codUs);
-            pstmt.setString(2, nombre);
-            pstmt.setString(3, correo);
-            pstmt.setString(4, contrasena);
-            pstmt.setString(5, esad);
+            pstmt.setString(1, nombre);
+            pstmt.setString(2, correo);
+            pstmt.setString(3, contrasena);
+            pstmt.setDate(4, fechaN);
             pstmt.executeUpdate();
             System.out.println("Estudiante añadido correctamente.");
         } catch (Exception e) {

@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-
+import controller.GestorUsuarios;
 
 import javax.swing.JTextField;
 import java.awt.GridLayout;
@@ -96,6 +96,19 @@ public class IU_LOGIN extends JFrame {
         public void actionPerformed(ActionEvent e) {
         	if(e.getSource().equals(logButton)) {
         		//CHECKEAR Y PROCEDER CON EL LOGIN
+        		
+        		String email = correoArea.getText();
+        		String password = passwordArea.getText();
+        		
+        		boolean logInCorrecto = GestorUsuarios.getGUsuarios().checkLogIn(email, password);
+        		
+        		if(logInCorrecto) {
+        			//PASA A MENU PRINCIPAL
+        		}
+        		else {
+        			//MOSTRAR PANTALLA DE ERROR
+        		}
+        		
         	}
         }
     }

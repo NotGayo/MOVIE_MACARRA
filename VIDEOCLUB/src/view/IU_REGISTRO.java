@@ -5,10 +5,15 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.GestorUsuarios;
+
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 
@@ -17,8 +22,12 @@ public class IU_REGISTRO extends JFrame {
 	private JPanel contentPane;
 	private JTextField nombre;
 	private JTextField correo;
-	private JTextField contraseña;
+	private JTextField contrasena;
 	private JTextField fechaNacimiento;
+    private Controler controler = null;
+    private JButton registerBtn;
+
+
 
 	/**
 	 * Launch the application.
@@ -55,10 +64,10 @@ public class IU_REGISTRO extends JFrame {
 		contentPane.add(correo);
 		correo.setColumns(10);
 		
-		contraseña = new JTextField();
-		contraseña.setBounds(170, 103, 96, 19);
-		contentPane.add(contraseña);
-		contraseña.setColumns(10);
+		contrasena = new JTextField();
+		contrasena.setBounds(170, 103, 96, 19);
+		contentPane.add(contrasena);
+		contrasena.setColumns(10);
 		
 		fechaNacimiento = new JTextField();
 		fechaNacimiento.setColumns(10);
@@ -77,17 +86,54 @@ public class IU_REGISTRO extends JFrame {
 		lblContrasea.setBounds(170, 89, 71, 13);
 		contentPane.add(lblContrasea);
 		
-		JLabel lblFechaNacimiento = new JLabel("Fecha Nacimiento");
-		lblFechaNacimiento.setBounds(170, 132, 81, 13);
+		JLabel lblFechaNacimiento = new JLabel("Fecha Nacimiento (\"DD/MM/YYYY\")");
+		lblFechaNacimiento.setBounds(170, 132, 159, 13);
 		contentPane.add(lblFechaNacimiento);
 		
-		JButton btnNewButton = new JButton("REGISTRAR");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 7));
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton registerBtn = new JButton("REGISTRAR");
+		registerBtn.setFont(new Font("Tahoma", Font.PLAIN, 7));
+		registerBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton.setBounds(170, 202, 96, 21);
-		contentPane.add(btnNewButton);
+		registerBtn.setBounds(170, 202, 96, 21);
+		contentPane.add(registerBtn);
+		registerBtn.addActionListener(getControler());
 	}
+	
+	private Controler getControler() {
+        if (this.controler == null) {
+            this.controler = new Controler();
+        }
+
+        return this.controler;
+    }
+	
+	private class Controler implements ActionListener {
+        private Controler() {
+        }
+        
+        public void actionPerformed(ActionEvent e) {
+        	if(e.getSource().equals(registerBtn)) {
+        		//CHECKEAR Y PROCEDER CON EL REGISTRO
+        		
+        		String nombreR = nombre.getText();
+        		String correoR = correo.getText();
+        		String contrasenaR = contrasena.getText();
+        		String fechaNacR = fechaNacimiento.getText();
+        		
+        		Boolean registroExitoso = GestorUsuarios.getGUsuarios().anadirRegistro(nombreR, correoR, contrasenaR, fechaNacR);
+        		
+        		if(registroExitoso) {
+        			//pasar al menu
+        		}
+        		else {
+        			
+        			//mostrar error
+        		}
+        		
+        		
+        	}
+        }
+    }
 }

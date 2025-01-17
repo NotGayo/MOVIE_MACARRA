@@ -8,11 +8,13 @@ public class DatabaseSetup {
 	
 	public static void createTables() {
         String sql = "CREATE TABLE IF NOT EXISTS Usuario("
-        		+ "codigoUsuario TEXT PRIMARY KEY,"
+        		+ "codigoUsuario TEXT PRIMARY KEY INCREMENTAL,"
         		+ "nombre TEXT NOT NULL,"
         		+ "CORREO TEXT NOT NULL,"
         		+ "CONTRASEnA TEXT NOT NULL,"
-        		+ "ESADMIN VARCHAR(2) NOT NULL)";
+        		+ "fechaNacimiento Date NOT NULL,"
+        		+ "ESADMIN VARCHAR(2) NOT NULL,"
+        		+ "ACEPTADO TEXT)";
 
         try (Connection conn = DatabaseConnection.connect();
              Statement stmt = conn.createStatement()) {

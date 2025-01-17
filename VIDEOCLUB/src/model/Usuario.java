@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.Date;
 import java.util.*;
 
 public class Usuario {
@@ -15,11 +16,20 @@ public class Usuario {
     private List<Pelicula> susEliminadasP;
     private List<Usuario> susEliminadosU;
     private List<Usuario> susAceptadosU;
-    private Usuario adminAceptador;
+    private boolean esAceptado;
     
+    
+    public Usuario(String nombre, String correo, String contrasena, Date fechaN) {
+    	this.nombre = nombre;
+    	this.correo = correo;
+    	this.contrasena = contrasena;
+    	this.fechaNacimiento = fechaN;
+    	this.esAdmin = false;
+    	
+    }
     
     public boolean esValidoUsuario() {
-    	return this.adminAceptador != null ;
+    	return this.esAceptado;
     }
     
     // Getters y setters
