@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import BBDD.DatabaseInsertion;
+import model.Pelicula;
+import model.Usuario;
 import model.Valoracion;
 
 public class GestorValoraciones {
@@ -28,5 +31,23 @@ public class GestorValoraciones {
 	}
 	public List<Valoracion> getListaVal(){
 		return lista;
+	}
+	
+	public boolean anadirVal(String correo, int codPelicula, Double puntuacion, String resena) {
+        for(Valoracion v : lista) {
+            if(v.getPelicula().getCodPeli() == codPelicula) {
+                return false;
+                }
+        }
+        if(puntuacion >= 0 && puntuacion <= 10) {
+            Usuario usuario = GestorUsuarios.getGUsuarios().buscarUsuario(correo);
+            Pelicula pelicula;
+            lista.add(new Valoracion(usuario, pelicula, puntuacion, resena));
+            DatabaseInsertion.insertarValoracion(correo, codPelicula, puntuacion, resena);
+            return true;
+                }
+        else {
+            return false;
+        }
 	}
 }

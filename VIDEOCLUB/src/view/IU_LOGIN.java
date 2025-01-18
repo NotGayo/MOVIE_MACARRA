@@ -109,7 +109,10 @@ public class IU_LOGIN extends JFrame {
         		if(logInCorrecto) {
         			//PASA A MENU PRINCIPAL
         			//@asier
+        			System.out.println("hago close y abro menu");
         			closeWindow();
+        			IU_MENU iueli = new IU_MENU(email);
+        			iueli.run();
         		}
         		else {
         			//MOSTRAR PANTALLA DE ERROR

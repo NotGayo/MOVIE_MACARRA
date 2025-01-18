@@ -20,5 +20,21 @@ public class DatabaseInsertion {
             System.out.println("Error al insertar datos: " + e.getMessage());
         }
     }
+    
+    public static void insertarValoracion(String correo, int codPelicula, Double puntuacion,String resena) { 
+        String sql = "INSERT INTO Valoracion(correo, codPelicula, puntuacion, resena) VALUES(?, ?, ?, ?)";
+
+        try (Connection conn = DatabaseConnection.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, correo);
+            pstmt.setInt(2, codPelicula);
+            pstmt.setDouble(3, puntuacion);
+            pstmt.setString(4, resena);
+            pstmt.executeUpdate();
+            System.out.println("Valoracion añadida correctamente.");
+        } catch (Exception e) {
+            System.out.println("Error al insertar datos: " + e.getMessage());
+        }
+    }
 }
 
