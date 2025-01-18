@@ -3,6 +3,7 @@ package controller;
 import java.sql.Date;
 import java.util.ArrayList;
 
+import BBDD.DatabaseDelete;
 import BBDD.DatabaseInsertion;
 import model.*;
 
@@ -14,13 +15,33 @@ public class GestorUsuarios {
 	
 	private GestorUsuarios() {
 		listaUsuarios = new ArrayList<Usuario>();
-		
+		listaUsuarios.add(new Usuario("ss","NO", "123", new Date(1,1,1)));
 		listaUsuarios.add(new Usuario("ss","primero@hotmail.com", "123", new Date(1,1,1)));
+		listaUsuarios.add(new Usuario("ss","segundo@hotmail.com", "123", new Date(1,1,1)));
+		listaUsuarios.add(new Usuario("ss","tercero@hotmail.com", "123", new Date(1,1,1)));
+		listaUsuarios.add(new Usuario("ss","NONO", "123", new Date(1,1,1)));
 	}
 	
 	public static GestorUsuarios getGUsuarios() {
 		return miGUsuarios;
 	}
+	
+	
+	public void eliminarUsuario(String pCorreo) {
+		Usuario unUs = null;
+		for(Usuario u : listaUsuarios) {
+			if(u.getCorreo().equalsIgnoreCase(pCorreo) && (listaUsuarios.indexOf(u) != listaUsuarios.size())) {
+				unUs = u;
+				
+			}
+		}
+		if(unUs != null) {
+			listaUsuarios.remove(unUs);
+			DatabaseDelete.borrarUsuario(pCorreo);
+		}
+	}
+	
+	
 	
 	
 	public void marcarRegistrado(String correo) {
