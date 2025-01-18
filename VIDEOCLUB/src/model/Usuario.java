@@ -16,7 +16,7 @@ public class Usuario {
     private List<Pelicula> susEliminadasP;
     private List<Usuario> susEliminadosU;
     private List<Usuario> susAceptadosU;
-    private boolean esAceptado;
+    private boolean esAceptado = false;
     
     
     public Usuario(String nombre, String correo, String contrasena, Date fechaN) {
@@ -27,7 +27,9 @@ public class Usuario {
     	this.esAdmin = false;
     	
     }
-    
+    public void marcarRegistrado() {
+    	this.esAceptado = true;
+    }
     public boolean esValidoUsuario() {
     	return this.esAceptado;
     }

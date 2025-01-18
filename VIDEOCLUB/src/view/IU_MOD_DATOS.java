@@ -1,36 +1,40 @@
 package view;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+
 public class IU_MOD_DATOS extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField newNombre;
+	private JTextField newCorreo;
+	private JTextField newContrasena;
+	private JButton confirmCambios;
+    private Controler controler = null;
 
+    
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					IU_MOD_DATOS frame = new IU_MOD_DATOS();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+	public void run() {
+		try {
+			IU_ERROR_LOGIN frame = new IU_ERROR_LOGIN();
+			frame.setVisible(true);
+		} catch (Exception e) {
+				e.printStackTrace();
 			}
-		});
-	}
+		}
 
 	/**
 	 * Create the frame.
@@ -44,24 +48,24 @@ public class IU_MOD_DATOS extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(147, 44, 96, 19);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		newNombre = new JTextField();
+		newNombre.setBounds(147, 44, 96, 19);
+		contentPane.add(newNombre);
+		newNombre.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(147, 98, 96, 19);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		newCorreo = new JTextField();
+		newCorreo.setBounds(147, 98, 96, 19);
+		contentPane.add(newCorreo);
+		newCorreo.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(147, 147, 96, 19);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		newContrasena = new JTextField();
+		newContrasena.setBounds(147, 147, 96, 19);
+		contentPane.add(newContrasena);
+		newContrasena.setColumns(10);
 		
-		JButton btnNewButton = new JButton("CONFIRM");
-		btnNewButton.setBounds(147, 211, 96, 21);
-		contentPane.add(btnNewButton);
+		confirmCambios = new JButton("CONFIRM");
+		confirmCambios.setBounds(147, 211, 96, 21);
+		contentPane.add(confirmCambios);
 		
 		JLabel lblNewLabel = new JLabel("nombre");
 		lblNewLabel.setBounds(147, 34, 45, 13);
@@ -75,4 +79,26 @@ public class IU_MOD_DATOS extends JFrame {
 		lblNewLabel_2.setBounds(147, 137, 58, 13);
 		contentPane.add(lblNewLabel_2);
 	}
+	
+	public void closeWindow() {
+		this.dispose();
+	}
+	private Controler getControler() {
+        if (this.controler == null) {
+            this.controler = new Controler();
+        }
+
+        return this.controler;
+    }
+	
+	private class Controler implements ActionListener {
+        private Controler() {
+        }
+        
+        public void actionPerformed(ActionEvent e) {
+        	if(e.getSource().equals(confirmCambios)) {
+        		//UPDATE USER DATA
+        	}
+        }
+    }
 }

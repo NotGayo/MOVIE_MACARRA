@@ -14,11 +14,23 @@ public class GestorUsuarios {
 	
 	private GestorUsuarios() {
 		listaUsuarios = new ArrayList<Usuario>();
+		
+		listaUsuarios.add(new Usuario("ss","primero@hotmail.com", "123", new Date(1,1,1)));
 	}
 	
 	public static GestorUsuarios getGUsuarios() {
 		return miGUsuarios;
 	}
+	
+	
+	public void marcarRegistrado(String correo) {
+		for(Usuario u : listaUsuarios) {
+			if(u.getCorreo().equalsIgnoreCase(correo)) {
+				u.marcarRegistrado();
+			}
+		}
+	}
+	
 	
 	public boolean esAceptadoUsuario(int codUser) {
 		boolean valido = false;
@@ -93,5 +105,9 @@ public class GestorUsuarios {
 			
 		}
 		return logInCorrecto;
+	}
+	
+	public ArrayList<Usuario> getListaUsuarios(){
+		return listaUsuarios;
 	}
 }
