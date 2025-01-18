@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import BBDD.DatabaseDelete;
 import BBDD.DatabaseInsertion;
+import BBDD.DatabaseUpdate;
 import model.*;
 
 public class GestorUsuarios {
@@ -15,11 +16,9 @@ public class GestorUsuarios {
 	
 	private GestorUsuarios() {
 		listaUsuarios = new ArrayList<Usuario>();
-		listaUsuarios.add(new Usuario("ss","NO", "123", new Date(1,1,1)));
 		listaUsuarios.add(new Usuario("ss","primero@hotmail.com", "123", new Date(1,1,1)));
 		listaUsuarios.add(new Usuario("ss","segundo@hotmail.com", "123", new Date(1,1,1)));
 		listaUsuarios.add(new Usuario("ss","tercero@hotmail.com", "123", new Date(1,1,1)));
-		listaUsuarios.add(new Usuario("ss","NONO", "123", new Date(1,1,1)));
 	}
 	
 	public static GestorUsuarios getGUsuarios() {
@@ -42,7 +41,20 @@ public class GestorUsuarios {
 	}
 	
 	
-	
+	public void modificarDatosUser(String pCorreo, String pNombre, String pContrasena) {
+		for(Usuario u : listaUsuarios) {
+			if(u.getCorreo().equalsIgnoreCase(pCorreo)) {
+				if(!pNombre.isEmpty()) {
+					u.setNombre(pNombre);
+					DatabaseUpdate.updateNombre(pCorreo, pNombre);
+				}
+				if(!pContrasena.isEmpty()) {
+					u.setContrasena(pContrasena);
+					DatabaseUpdate.updateContra(pCorreo, pContrasena);
+				}
+			}
+		}
+	}
 	
 	public void marcarRegistrado(String correo) {
 		for(Usuario u : listaUsuarios) {

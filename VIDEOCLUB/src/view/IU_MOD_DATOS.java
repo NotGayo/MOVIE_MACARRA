@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controller.GestorUsuarios;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -18,10 +19,10 @@ public class IU_MOD_DATOS extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField newNombre;
-	private JTextField newCorreo;
 	private JTextField newContrasena;
 	private JButton confirmCambios;
     private Controler controler = null;
+    String correoUsuario;
 
     
 	/**
@@ -39,7 +40,8 @@ public class IU_MOD_DATOS extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public IU_MOD_DATOS() {
+	public IU_MOD_DATOS(String correo) {
+		this.correoUsuario = correo;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -53,13 +55,8 @@ public class IU_MOD_DATOS extends JFrame {
 		contentPane.add(newNombre);
 		newNombre.setColumns(10);
 		
-		newCorreo = new JTextField();
-		newCorreo.setBounds(147, 98, 96, 19);
-		contentPane.add(newCorreo);
-		newCorreo.setColumns(10);
-		
 		newContrasena = new JTextField();
-		newContrasena.setBounds(147, 147, 96, 19);
+		newContrasena.setBounds(147, 113, 96, 19);
 		contentPane.add(newContrasena);
 		newContrasena.setColumns(10);
 		
@@ -71,12 +68,8 @@ public class IU_MOD_DATOS extends JFrame {
 		lblNewLabel.setBounds(147, 34, 45, 13);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("correo");
-		lblNewLabel_1.setBounds(147, 88, 45, 13);
-		contentPane.add(lblNewLabel_1);
-		
 		JLabel lblNewLabel_2 = new JLabel("contrase\u00F1a");
-		lblNewLabel_2.setBounds(147, 137, 58, 13);
+		lblNewLabel_2.setBounds(147, 101, 58, 13);
 		contentPane.add(lblNewLabel_2);
 	}
 	
@@ -98,6 +91,10 @@ public class IU_MOD_DATOS extends JFrame {
         public void actionPerformed(ActionEvent e) {
         	if(e.getSource().equals(confirmCambios)) {
         		//UPDATE USER DATA
+        		String contrasenaN = newContrasena.getText();
+        		String nombreN = newNombre.getText();
+        		
+        		GestorUsuarios.getGUsuarios().modificarDatosUser(correoUsuario, nombreN, contrasenaN);
         	}
         }
     }
