@@ -1,11 +1,14 @@
 package controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import model.Alquiler;
 import model.Pelicula;
 import model.Usuario;
+import model.Valoracion;
 
 public class GestorAlquileres {
 
@@ -25,11 +28,12 @@ public class GestorAlquileres {
 	}
 	
 	public Alquiler crearAlquiler(Usuario usuario, Pelicula pelicula) {
-		return Alquiler.crearAlquiler(usuario,pelicula); 
+		return Alquiler.crearAlquiler(usuario,pelicula);
 	}
 	
-	public void anadirAlquiler(Alquiler alquiler) {
+	public void anadirAlquiler(Usuario usuario,Alquiler alquiler) {
 		this.lista.add(alquiler);
+		usuario.anadirAlquiler(alquiler);
 	}
 	
 	public void finalizarAlquiler(){

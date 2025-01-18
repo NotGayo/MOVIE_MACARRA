@@ -26,23 +26,13 @@ public class IU_BUSCARPELI extends JFrame {
 	private JPanel panel;
 	private JList<String> list;
 	private GestorPelis gestorPeliculas; // Gestor de películas
+	String correoUsuario;
 
-	// Método principal para ejecutar la aplicación
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					IU_BUSCARPELI frame = new IU_BUSCARPELI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	// Constructor de la ventana
-	public IU_BUSCARPELI() {
+	public IU_BUSCARPELI(String correo) {
+		this.correoUsuario = correo;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -78,6 +68,8 @@ public class IU_BUSCARPELI extends JFrame {
 	
 	private void agregarListSelectionListener() {
 		list.addListSelectionListener(new ListSelectionListener() {
+			
+
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				if (!e.getValueIsAdjusting()) { // Evitar manejar eventos duplicados
@@ -86,7 +78,7 @@ public class IU_BUSCARPELI extends JFrame {
 
 					if (pelicula != null) {
 						// Abrir la ventana IU_ALQUILAR con la película seleccionada
-						IU_ALQUILAR ventanaAlquilar = new IU_ALQUILAR(pelicula);
+						IU_ALQUILAR ventanaAlquilar = new IU_ALQUILAR(pelicula,IU_BUSCARPELI.this.correoUsuario);
 						ventanaAlquilar.setVisible(true);
 					}
 				}

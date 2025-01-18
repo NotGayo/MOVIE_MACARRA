@@ -141,4 +141,7 @@ public class Usuario {
     	}
     	return alquilada;
     }
+	public void anadirAlquiler(Alquiler alquiler) {
+		this.susAlquileres.add(alquiler);		
+	}
 }

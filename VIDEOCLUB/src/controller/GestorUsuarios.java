@@ -143,4 +143,13 @@ public class GestorUsuarios {
 	public ArrayList<Usuario> getListaUsuarios(){
 		return listaUsuarios;
 	}
+
+	public Usuario buscarUsuario(String correoUsuario) { 
+		for (Usuario u : listaUsuarios) {
+			if(correoUsuario == u.getCorreo()) {
+				return u;
+			}
+		}
+		return null;
+	}
 }
