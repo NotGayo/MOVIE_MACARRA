@@ -101,6 +101,10 @@ public class IU_REGISTRO extends JFrame {
 		registerBtn.addActionListener(getControler());
 	}
 	
+	
+	public void closeWindow() {
+		this.dispose();
+	}	
 	private Controler getControler() {
         if (this.controler == null) {
             this.controler = new Controler();
@@ -126,10 +130,14 @@ public class IU_REGISTRO extends JFrame {
         		
         		if(registroExitoso) {
         			//pasar al menu
+        			closeWindow();
         		}
         		else {
         			
         			//mostrar error
+        			closeWindow();
+        			IU_ERROR_REGISTER iuer = new IU_ERROR_REGISTER();
+        			iuer.run();
         		}
         		
         		

@@ -81,6 +81,10 @@ public class IU_LOGIN extends JFrame {
 	}
 	
 	
+	public void closeWindow() {
+		this.dispose();
+	}
+	
 	private Controler getControler() {
         if (this.controler == null) {
             this.controler = new Controler();
@@ -101,12 +105,18 @@ public class IU_LOGIN extends JFrame {
         		String password = passwordArea.getText();
         		
         		boolean logInCorrecto = GestorUsuarios.getGUsuarios().checkLogIn(email, password);
-        		
+        		System.out.println(logInCorrecto);
         		if(logInCorrecto) {
         			//PASA A MENU PRINCIPAL
+        			//@asier
+        			closeWindow();
         		}
         		else {
         			//MOSTRAR PANTALLA DE ERROR
+        			System.out.println("hago close y abro error");
+        			closeWindow();
+        			IU_ERROR_LOGIN iueli = new IU_ERROR_LOGIN();
+        			iueli.run();
         		}
         		
         	}
