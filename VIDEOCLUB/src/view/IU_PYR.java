@@ -26,6 +26,8 @@ public class IU_PYR extends JFrame {
 	private JButton valoracion;
 	private Pelicula pPelicula;
 	private String correo;
+    private boolean esAdmin;
+
 
 	/**
 	 * Launch the application.
@@ -111,7 +113,7 @@ public class IU_PYR extends JFrame {
         		if(valoracionExitosa) {
         			//pasar al menu
         			closeWindow();
-        			IU_MENU ium = new IU_MENU(correo);
+        			IU_MENU ium = new IU_MENU(correo, esAdmin);
         			ium.run();
         		}
         		else {

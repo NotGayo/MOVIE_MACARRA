@@ -25,6 +25,12 @@ public class Usuario {
     	this.contrasena = contrasena;
     	this.fechaNacimiento = fechaN;
     	this.esAdmin = false;
+    	this.susAlquileres = new ArrayList<>();
+    	this.susValoraciones = new ArrayList<>();
+    	this.susAnadidasP = new ArrayList<>();
+        this.susEliminadasP = new ArrayList<>();
+    	this.susEliminadosU = new ArrayList<>();
+    	this.susAceptadosU = new ArrayList<>();
     	
     }
     public void marcarRegistrado() {
@@ -133,12 +139,15 @@ public class Usuario {
     
     public boolean laHeAlquilado(int codPelicula) {
     	boolean alquilada = false;
-    	for (Alquiler al : this.susAlquileres) {
-    		if (al.getPelicula().getCodPeli() == codPelicula) {
-    			alquilada = true;
-    			break;
-    		}
+    	if(this.susAlquileres == null) {
+    		
     	}
+    		for (Alquiler al : this.susAlquileres) {
+    			if (al.getPelicula().getCodPeli() == codPelicula) {
+    				alquilada = true;
+    				break;
+    			}
+    		}
     	return alquilada;
     }
 	public void anadirAlquiler(Alquiler alquiler) {
