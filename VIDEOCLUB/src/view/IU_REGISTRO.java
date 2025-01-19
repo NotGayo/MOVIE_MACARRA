@@ -90,12 +90,9 @@ public class IU_REGISTRO extends JFrame {
 		lblFechaNacimiento.setBounds(170, 132, 159, 13);
 		contentPane.add(lblFechaNacimiento);
 		
-		JButton registerBtn = new JButton("REGISTRAR");
+		registerBtn = new JButton("REGISTRAR");
 		registerBtn.setFont(new Font("Tahoma", Font.PLAIN, 7));
-		registerBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		
 		registerBtn.setBounds(170, 202, 96, 21);
 		contentPane.add(registerBtn);
 		registerBtn.addActionListener(getControler());
@@ -130,7 +127,10 @@ public class IU_REGISTRO extends JFrame {
         		
         		if(registroExitoso) {
         			//pasar al menu
+        			System.out.println("hago close y abro menu");
         			closeWindow();
+        			IU_MENU iueli = new IU_MENU(correoR);
+        			iueli.run();
         		}
         		else {
         			

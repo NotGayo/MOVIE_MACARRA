@@ -1,17 +1,18 @@
 package view;
 
-import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import controller.GestorUsuarios;
+
 import controller.GestorValoraciones;
+import model.Pelicula;
 
 import javax.swing.JButton;
-import java.awt.FlowLayout;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -23,7 +24,7 @@ public class IU_PYR extends JFrame {
 	private JTextField resena;
 	private Controler controler = null;
 	private JButton valoracion;
-	private int codPelicula;
+	private Pelicula pPelicula;
 	private String correo;
 
 	/**
@@ -31,7 +32,7 @@ public class IU_PYR extends JFrame {
 	 */
 	public void run() {
 		try {
-			IU_PYR frame = new IU_PYR(correo, codPelicula);
+			IU_PYR frame = new IU_PYR(correo, pPelicula);
 			frame.setVisible(true);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -41,9 +42,9 @@ public class IU_PYR extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public IU_PYR(String usuario, int pelicula) {
+	public IU_PYR(String usuario, Pelicula pelicula) {
 		this.correo = usuario;
-		this.codPelicula = pelicula;
+		this.pPelicula = pelicula;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -105,7 +106,7 @@ public class IU_PYR extends JFrame {
             	Double puntacionV = Double.parseDouble(puntuacion.getText());
         		String resenaV = resena.getText();
         		
-        		Boolean valoracionExitosa = GestorValoraciones.getGV().anadirVal(correo, codPelicula, puntacionV, resenaV);
+        		Boolean valoracionExitosa = GestorValoraciones.getGV().anadirVal(correo, pPelicula, puntacionV, resenaV);
         		
         		if(valoracionExitosa) {
         			//pasar al menu
@@ -117,7 +118,7 @@ public class IU_PYR extends JFrame {
         			
         			//mostrar error
         			closeWindow();
-        			IU_ERROR_VALORAR iuev = new IU_ERROR_VALORAR(correo, codPelicula);
+        			IU_ERROR_VALORAR iuev = new IU_ERROR_VALORAR(correo, pPelicula);
         			iuev.run();
         		}
         		

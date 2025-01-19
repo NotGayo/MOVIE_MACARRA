@@ -2,6 +2,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,8 +18,9 @@ public class IU_MENU extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private JButton pyr;
-    private JButton alquilar;
+    private JButton mrp;
+    private JButton buscarPeli;
+    private JButton actualizarDatos;
     
     private Controler controler = null;
     private String correo;
@@ -41,22 +43,28 @@ public class IU_MENU extends JFrame {
      */
     public IU_MENU(String email) {
     	this.correo = email;
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 450, 300);
-        contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        contentPane.setLayout(new GridLayout(2, 1, 10, 10)); // Dos filas, una para cada botón
-
-
-        setContentPane(contentPane);
-        pyr = new JButton("PUNTUAR Y RESERÑAR");
-		contentPane.add(pyr);
-        this.pyr.addActionListener(this.getControler());
+    	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) contentPane.getLayout();
+		flowLayout.setVgap(170);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         setContentPane(contentPane);
-        alquilar = new JButton("ALQUILAR");
-		contentPane.add(alquilar);
-        this.alquilar.addActionListener(this.getControler());
+        mrp = new JButton("PUNTUAR Y RESERÑAR");
+		contentPane.add(mrp);
+        this.mrp.addActionListener(this.getControler());
+
+        setContentPane(contentPane);
+        buscarPeli = new JButton("BUSCAR PELICULA");
+		contentPane.add(buscarPeli);
+        this.buscarPeli.addActionListener(this.getControler());
+        
+        setContentPane(contentPane);
+        actualizarDatos = new JButton("ACTUALIZAR DATOS");
+		contentPane.add(actualizarDatos);
+        this.actualizarDatos.addActionListener(this.getControler());
+
 
 
 
@@ -79,18 +87,25 @@ public class IU_MENU extends JFrame {
         }
         
         public void actionPerformed(ActionEvent e) {
-        	if (e.getSource().equals(pyr)) {
+        	if (e.getSource().equals(mrp)) {
         		//iniciar una ventana de login
         		closeWindow();
-        		IU_PYR iupyr = new IU_PYR(correo, codPelicula);
-        		iupyr.run();
+        		IU_MRP iumrp = new IU_MRP(correo);
+        		iumrp.run();
         	}
         	
-        	if (e.getSource().equals(alquilar)) {
-        		//iniciar una ventana de login
+        	if (e.getSource().equals(buscarPeli)) {
+        		//iniciar una ventana de buscar pelicula
         		closeWindow();
         		IU_BUSCARPELI iual = new IU_BUSCARPELI(correo);
         		//iual.run();
+        	}
+        	
+        	if (e.getSource().equals(actualizarDatos)) {
+        		//iniciar una ventana de modificar datos
+        		closeWindow();
+        		IU_MOD_DATOS iumd = new IU_MOD_DATOS(correo);
+        		iumd.run();
         	}
         	
         }

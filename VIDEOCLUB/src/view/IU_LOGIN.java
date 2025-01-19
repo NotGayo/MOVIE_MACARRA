@@ -108,7 +108,6 @@ public class IU_LOGIN extends JFrame {
         		System.out.println(logInCorrecto);
         		if(logInCorrecto) {
         			//PASA A MENU PRINCIPAL
-        			//@asier
         			System.out.println("hago close y abro menu");
         			closeWindow();
         			IU_MENU iueli = new IU_MENU(email);

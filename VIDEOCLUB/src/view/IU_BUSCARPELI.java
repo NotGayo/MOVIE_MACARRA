@@ -27,8 +27,16 @@ public class IU_BUSCARPELI extends JFrame {
 	private JList<String> list;
 	private GestorPelis gestorPeliculas; // Gestor de películas
 	String correoUsuario;
-
 	
+	
+	public void run() {
+		try {
+			IU_BUSCARPELI frame = new IU_BUSCARPELI(correoUsuario);
+			frame.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
+				}
+		}
 
 	// Constructor de la ventana
 	public IU_BUSCARPELI(String correo) {
@@ -77,8 +85,8 @@ public class IU_BUSCARPELI extends JFrame {
 					Pelicula pelicula = gestorPeliculas.buscarPeliculaPorTitulo(titulo); // Buscar la película
 
 					if (pelicula != null) {
-						// Abrir la ventana IU_ALQUILAR con la película seleccionada
-						IU_ALQUILAR ventanaAlquilar = new IU_ALQUILAR(pelicula,IU_BUSCARPELI.this.correoUsuario);
+						// Abrir la ventana IU_MENU_PELI con la película seleccionada
+						IU_MENU_PELI ventanaMenuPeli = new IU_MENU_PELI(pelicula, correoUsuario);
 						ventanaAlquilar.setVisible(true);
 					}
 				}

@@ -11,20 +11,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import model.Pelicula;
+
 public class IU_ERROR_VALORAR extends JFrame {
 
 	private JPanel contentPane;
     private Controler controler = null;
     private JButton backToRegBtn;
     private String correo;
-    private int codPelicula;
+    private Pelicula pPelicula;
 
 	/**
 	 * Launch the application.
 	 */
 	 public void run() {
 			try {
-				IU_ERROR_LOGIN frame = new IU_ERROR_LOGIN();
+				IU_ERROR_VALORAR frame = new IU_ERROR_VALORAR(correo, pPelicula);
 				frame.setVisible(true);
 			} catch (Exception e) {
 					e.printStackTrace();
@@ -34,9 +36,9 @@ public class IU_ERROR_VALORAR extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public IU_ERROR_VALORAR(String usuario, int pelicula) {
+	public IU_ERROR_VALORAR(String usuario, Pelicula pelicula) {
 		this.correo = usuario;
-		this.codPelicula = pelicula;
+		this.pPelicula = pelicula;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -82,7 +84,7 @@ public class IU_ERROR_VALORAR extends JFrame {
         	if(e.getSource().equals(backToRegBtn)) {
         		System.out.println("pulso");
         		closeWindow();
-        		IU_PYR iur = new IU_PYR(correo, codPelicula);
+        		IU_PYR iur = new IU_PYR(correo, pPelicula);
         		iur.run();
         	}
         }

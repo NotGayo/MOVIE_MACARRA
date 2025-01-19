@@ -81,9 +81,9 @@ public class GestorUsuarios {
 	
 	public boolean anadirRegistro(String nombre, String correo, String contrasena, String fechaN) {
 		//MODFICAR STRING INTO DATE(INT,INT,INT)
-		int dia = 0;
-		int mes = 0;
-		int ano = 0;
+		int dia = 1;
+		int mes = 1;
+		int ano = 1;
 		if (ano >= 1) { // Validar año
 		    if (mes >= 1 && mes <= 12) { // Validar mes
 		        if (dia >= 1 && dia <= diasEnMes(mes, ano)) { // Validar día según mes y año

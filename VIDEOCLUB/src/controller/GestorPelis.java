@@ -37,5 +37,16 @@ public class GestorPelis {
 		}
 		return null;
 	}
+	
+	public Pelicula buscarPeliculaPorCodigo(int codPelicula) {
+		Iterator<Pelicula> it = GestorPelis.getGPelis().getIterador();
+		while (it.hasNext()) {
+			Pelicula pelicula = it.next();
+			if (pelicula.getCodPeli() == codPelicula) {
+				return pelicula;
+			}
+		}
+		return null;
+	}
 
 }

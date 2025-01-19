@@ -33,17 +33,16 @@ public class GestorValoraciones {
 		return lista;
 	}
 	
-	public boolean anadirVal(String correo, int codPelicula, Double puntuacion, String resena) {
+	public boolean anadirVal(String correo, Pelicula pPelicula, Double puntuacion, String resena) {
         for(Valoracion v : lista) {
-            if(v.getPelicula().getCodPeli() == codPelicula) {
+            if(v.getPelicula().equals(pPelicula)) {
                 return false;
                 }
         }
         if(puntuacion >= 0 && puntuacion <= 10) {
             Usuario usuario = GestorUsuarios.getGUsuarios().buscarUsuario(correo);
-            Pelicula pelicula;
-            lista.add(new Valoracion(usuario, pelicula, puntuacion, resena));
-            DatabaseInsertion.insertarValoracion(correo, codPelicula, puntuacion, resena);
+            lista.add(new Valoracion(usuario, pPelicula, puntuacion, resena));
+            DatabaseInsertion.insertarValoracion(correo, pPelicula.getCodPeli(), puntuacion, resena);
             return true;
                 }
         else {

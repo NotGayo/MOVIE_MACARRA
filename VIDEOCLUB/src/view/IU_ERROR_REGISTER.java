@@ -23,7 +23,7 @@ public class IU_ERROR_REGISTER extends JFrame {
 	 */
 	 public void run() {
 			try {
-				IU_ERROR_LOGIN frame = new IU_ERROR_LOGIN();
+				IU_ERROR_REGISTER frame = new IU_ERROR_REGISTER();
 				frame.setVisible(true);
 			} catch (Exception e) {
 					e.printStackTrace();
