@@ -3,11 +3,8 @@ package controller;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import java.util.List;
-
 import model.Alquiler;
 import model.Pelicula;
-import model.Valoracion;
 
 public class GestorPelis {
 
@@ -15,11 +12,15 @@ public class GestorPelis {
 	private static GestorPelis miGPelis = new GestorPelis();
 	
 	private GestorPelis() {
-		ArrayList<Valoracion> asd = new ArrayList<Valoracion>();
 		this.lista = new ArrayList<Pelicula>();
-		lista.add(new Pelicula(1,"a","aa","aaa",20202,"a.mp4","aaaa", asd));
-		lista.add(new Pelicula(2,"b","bb","bbb",20202,"b.mp4","bbbb", asd));
-		lista.add(new Pelicula(3,"c","aa","bbb",20202,"c.mp4","cccc", asd));
+		
+		Pelicula pelicula1 = new Pelicula(1, "a", "a", "a", 2000, "a", "a");
+		Pelicula pelicula2 = new Pelicula(2, "b", "b", "b", 2000, "b", "b");
+		Pelicula pelicula3 = new Pelicula(3, "c", "c", "c", 2000, "c", "c");
+		
+		lista.add(pelicula1);
+		lista.add(pelicula2);
+		lista.add(pelicula3);
 	}
 	
 	public static GestorPelis getGPelis() {

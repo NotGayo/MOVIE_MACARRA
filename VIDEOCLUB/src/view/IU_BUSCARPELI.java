@@ -58,8 +58,7 @@ public class IU_BUSCARPELI extends JFrame {
 	// Método para cargar algunas películas de ejemplo
 	private void cargarPeliculas() {
 		//gestorValoraciones.anadirValoracion(...)
-		List<Valoracion> valoraciones = GestorValoraciones.getGV().getListaVal();
-		gestorPeliculas.anadirPelicula(new Pelicula(1,"El Padrino", "Francis Ford Coppola","asier", 1972,"fvh","dfghjkl", valoraciones));
+		gestorPeliculas.anadirPelicula(new Pelicula(1,"El Padrino", "Francis Ford Coppola","asier", 1972,"fvh","dfghjkl"));
 	}
 
 	// Método para actualizar la lista con las películas
@@ -74,6 +73,10 @@ public class IU_BUSCARPELI extends JFrame {
 		list.setModel(modelo); // Establecer el modelo en la JList
 	}
 	
+	public void closeWindow() {
+		this.dispose();
+	}
+	
 	private void agregarListSelectionListener() {
 		list.addListSelectionListener(new ListSelectionListener() {
 			
@@ -86,8 +89,10 @@ public class IU_BUSCARPELI extends JFrame {
 
 					if (pelicula != null) {
 						// Abrir la ventana IU_MENU_PELI con la película seleccionada
+						closeWindow();
 						IU_MENU_PELI ventanaMenuPeli = new IU_MENU_PELI(pelicula, correoUsuario);
-						ventanaAlquilar.setVisible(true);
+						ventanaMenuPeli.run();
+						
 					}
 				}
 			}

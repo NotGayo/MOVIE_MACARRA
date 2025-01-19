@@ -13,7 +13,7 @@ public class Pelicula {
     private List<Valoracion> peValoraciones;
     
     public Pelicula(int pCodPelicula,String pTitulo,String pDirector, String pActor, int pAnio,String pArchivoVideo
-    ,String pDescripcion,List<Valoracion> pPeValoraciones ) {
+    ,String pDescripcion) {
     	this.codPelicula = pCodPelicula;
    	 	this.titulo = pTitulo;
    	 	this.director = pDirector;
@@ -21,7 +21,6 @@ public class Pelicula {
 	 	this.anio = pAnio;
 	 	this.archivoVideo = pArchivoVideo;
 	 	this.descripcion = pDescripcion;
-   	 	this.peValoraciones = pPeValoraciones;
     }
     // Getters y setters
     // Similar a los anteriores, se deben implementar para todos los atributos

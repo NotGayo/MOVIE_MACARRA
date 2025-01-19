@@ -101,7 +101,7 @@ public class IU_MENU_PELI extends JFrame {
         	if (e.getSource().equals(vpp)) {
         		//iniciar una ventana de modificar datos
         		closeWindow();
-        		IU_VPP iuvpp = new IU_VPP();
+        		IU_VPP iuvpp = new IU_VPP(pPelicula);
         		iuvpp.run();
         	}
         	

@@ -34,4 +34,34 @@ public class DatabaseUpdate {
             System.out.println("Error al insertar datos: " + e.getMessage());
         }
     }
+
+	public static void updatePuntuacion(String pCorreo, Double pPuntuacion) {
+		 String sql = "UPDATE VALORACION WHERE correo = ? SET puntuacion = ?";
+
+	        try (Connection conn = DatabaseConnection.connect();
+	            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+	            pstmt.setString(1, pCorreo);
+	            pstmt.setDouble(2, pPuntuacion);
+	            
+	            pstmt.executeUpdate();
+	            System.out.println("Valoración modificado correctamente.");
+	        } catch (Exception e) {
+	            System.out.println("Error al insertar datos: " + e.getMessage());
+	        }
+	}
+	
+	public static void updateResena(String pCorreo, String pResena) {
+		String sql = "UPDATE VALORACION WHERE correo = ? SET resena = ?";
+
+        try (Connection conn = DatabaseConnection.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, pCorreo);
+            pstmt.setString(2, pResena);
+            
+            pstmt.executeUpdate();
+            System.out.println("Valoracion modificado correctamente.");
+        } catch (Exception e) {
+            System.out.println("Error al insertar datos: " + e.getMessage());
+        }
+	}
 }
