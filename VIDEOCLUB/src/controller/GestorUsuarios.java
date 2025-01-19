@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import BBDD.DatabaseDelete;
 import BBDD.DatabaseInsertion;
+import BBDD.DatabaseSelection;
 import BBDD.DatabaseUpdate;
 import model.*;
 
@@ -16,14 +17,36 @@ public class GestorUsuarios {
 	
 	private GestorUsuarios() {
 		listaUsuarios = new ArrayList<Usuario>();
-		listaUsuarios.add(new Usuario("ss","primero@hotmail.com", "123", new Date(1,1,1)));
-		listaUsuarios.add(new Usuario("ss","segundo@hotmail.com", "123", new Date(1,1,1)));
-		listaUsuarios.add(new Usuario("ss","tercero@hotmail.com", "123", new Date(1,1,1)));
+		crearUsuario("ss","primero@hotmail.com", "123", new Date(1,1,1));
+		crearUsuario("ss","segundo@hotmail.com", "123", new Date(1,1,1));
+		crearUsuario("ss","tercero@hotmail.com", "123", new Date(1,1,1));
+		for(Usuario u : listaUsuarios) {
+			if(u.getCorreo().equalsIgnoreCase("primero@hotmail.com")) {
+				u.setEsAdmin(true);
+			}
+		}
+		
 	}
 	
 	public static GestorUsuarios getGUsuarios() {
 		return miGUsuarios;
 	}
+	
+	
+	public void crearUsuario(String nombre, String correo, String contrasena, Date fechaNacimiento) {
+		listaUsuarios.add(new Usuario(nombre, correo, contrasena, fechaNacimiento));
+		DatabaseInsertion.insertarUsuario(nombre, correo, contrasena, fechaNacimiento);
+		DatabaseSelection.selectUsuario();
+	}
+	
+	public void finalizarAlquiler(String pCorreo, Pelicula pPeli) {
+		for(Usuario u : listaUsuarios) {
+			if(u.getCorreo().equalsIgnoreCase(pCorreo)) {
+				u.borrarPeliPorObjeto(pPeli);
+			}
+		}
+	}
+	
 	
 	
 	public void eliminarUsuario(String pCorreo, String correoAdm) {
@@ -45,7 +68,9 @@ public class GestorUsuarios {
 			admin.getSusEliminadosU().add(unUs);
 			listaUsuarios.remove(unUs);
 			DatabaseDelete.borrarUsuario(pCorreo);
+			GestorAlquileres.getGAlquileres().eliminarAlquileresDe(unUs);
 		}
+		
 	}
 	
 	
@@ -100,7 +125,7 @@ public class GestorUsuarios {
 		
 		for(Usuario u : listaUsuarios) {
 			if(u.getCodUsuario() == codUser) {
-				if(u.esValidoUsuario()) {
+				if(u.estaAceptado()) {
 					return true; 
 				}
 			}

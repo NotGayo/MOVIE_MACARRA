@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 
 public class DatabaseInsertion {
     public static void insertarUsuario(String nombre, String correo, String contrasena,Date fechaN) {
-        String sql = "INSERT INTO Usuario(nombre, correo, contrasena, fechaNacimiento) VALUES(?, ?, ?, ?)";
+        String sql = "INSERT INTO Usuario(nombre, correo, contrasena, fechan) VALUES(?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnection.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {

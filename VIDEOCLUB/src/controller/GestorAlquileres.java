@@ -1,7 +1,9 @@
 package controller;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -23,6 +25,14 @@ public class GestorAlquileres {
 		return miGAlquileres;
 	}
 	
+	public void eliminarAlquileresDe(Usuario uBorrado) {
+		for(Alquiler a : lista) {
+			if(a.getUsuario().equals(uBorrado)) {
+				lista.remove(a);
+			}
+		}
+	}
+	
 	private Iterator<Alquiler> getIterador(){
 		return this.lista.iterator();
 	}
@@ -41,10 +51,14 @@ public class GestorAlquileres {
 		Alquiler unAlquiler;
 		while(itr.hasNext()) {
 			unAlquiler = itr.next();
-			if (unAlquiler.haFinalizado()) {
-				itr.remove();
+			if (unAlquiler.haFinalizado())
+			{
+				GestorUsuarios.getGUsuarios().finalizarAlquiler(unAlquiler.getUsuario().getCorreo(), unAlquiler.getPelicula());
+				lista.remove(unAlquiler);
 			}
 		}
 	}
+	
+	
 
 }

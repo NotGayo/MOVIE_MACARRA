@@ -25,13 +25,14 @@ public class IU_ADMIN_MOD_USUARIO extends JFrame {
     private Controler controler = null;
     JList<String> listaUsuarios;
     ArrayList<Usuario> listaCompleta;
+    private boolean esAdmin;
 
 	/**
 	 * Launch the application.
 	 */
 	public void run() {
 		try {
-			IU_ADMIN_MOD_USUARIO frame = new IU_ADMIN_MOD_USUARIO(correo);
+			IU_ADMIN_MOD_USUARIO frame = new IU_ADMIN_MOD_USUARIO(correo,esAdmin);
 			frame.setVisible(true);
 		} catch (Exception e) {
 				e.printStackTrace();
@@ -41,8 +42,9 @@ public class IU_ADMIN_MOD_USUARIO extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public IU_ADMIN_MOD_USUARIO(String correo) {
+	public IU_ADMIN_MOD_USUARIO(String correo, boolean esAdmin) {
 		this.correo = correo;
+		this.esAdmin = esAdmin;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -71,7 +73,7 @@ public class IU_ADMIN_MOD_USUARIO extends JFrame {
 		
 		
 		
-		modUserBtn = new JButton("BORRAR");
+		modUserBtn = new JButton("MODIFICAR");
 		modUserBtn.addActionListener(getControler());
 		contentPane.add(modUserBtn);
 		
@@ -103,7 +105,7 @@ public class IU_ADMIN_MOD_USUARIO extends JFrame {
         		
         		String emailUsAModificar = listaUsuarios.getSelectedValue();
         		closeWindow();
-        		IU_MOD_DATOS iumd = new IU_MOD_DATOS(emailUsAModificar);
+        		IU_MOD_DATOS iumd = new IU_MOD_DATOS(emailUsAModificar, esAdmin);
         		iumd.run();
         		
         	}

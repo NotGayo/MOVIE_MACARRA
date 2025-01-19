@@ -1,148 +1,129 @@
 package view;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
+import java.awt.EventQueue;
+
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import controller.GestorUsuarios;
 
+import javax.swing.JTextField;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.FlowLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+
 public class IU_LOGIN extends JFrame {
 
-    private JPanel contentPane;
-    private JTextField correoArea;
-    private JTextField passwordArea;
+	private JPanel contentPane;
+	private JTextField correoArea;
+	private JTextField passwordArea;
     private Controler controler = null;
     private JButton logButton;
 
-    /**
-     * Launch the application.
-     */
-    public void run() {
-        try {
-            IU_LOGIN frame = new IU_LOGIN();
-            frame.setVisible(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+	/**
+	 * Launch the application.
+	 */
+	
+		public void run() {
+			try {
+				IU_LOGIN frame = new IU_LOGIN();
+				frame.setVisible(true);
+			} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		
+	
 
-    /**
-     * Create the frame.
-     */
-    public IU_LOGIN() {
-        setTitle("Inicio de Sesión");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 400, 300);
-        setResizable(false);
+	/**
+	 * Create the frame.
+	 */
+	public IU_LOGIN() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-        // Configuración del panel principal
-        contentPane = new JPanel();
-        contentPane.setBackground(new Color(60, 63, 65)); // Fondo oscuro
-        contentPane.setBorder(new EmptyBorder(20, 20, 20, 20));
-        contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
-        setContentPane(contentPane);
-
-        // Espaciado superior
-        contentPane.add(Box.createVerticalStrut(20));
-
-        // Etiqueta para email
-        JLabel emailLabel = new JLabel("Email:");
-        emailLabel.setFont(new Font("Arial", Font.BOLD, 14));
-        emailLabel.setForeground(Color.WHITE);
-        emailLabel.setAlignmentX(CENTER_ALIGNMENT);
-        contentPane.add(emailLabel);
-
-        // Campo de texto para email
-        correoArea = new JTextField(20);
-        correoArea.setMaximumSize(correoArea.getPreferredSize());
-        correoArea.setAlignmentX(CENTER_ALIGNMENT);
-        contentPane.add(correoArea);
-        correoArea.addActionListener(getControler());
-
-        // Espaciado entre elementos
-        contentPane.add(Box.createVerticalStrut(10));
-
-        // Etiqueta para password
-        JLabel passwordLabel = new JLabel("Password:");
-        passwordLabel.setFont(new Font("Arial", Font.BOLD, 14));
-        passwordLabel.setForeground(Color.WHITE);
-        passwordLabel.setAlignmentX(CENTER_ALIGNMENT);
-        contentPane.add(passwordLabel);
-
-        // Campo de texto para password
-        passwordArea = new JTextField(20);
-        passwordArea.setMaximumSize(passwordArea.getPreferredSize());
-        passwordArea.setAlignmentX(CENTER_ALIGNMENT);
-        contentPane.add(passwordArea);
-        passwordArea.addActionListener(getControler());
-
-        // Espaciado entre elementos
-        contentPane.add(Box.createVerticalStrut(20));
-
-        // Botón de login
-        logButton = new JButton("ACCEDER");
-        logButton.setFont(new Font("Arial", Font.BOLD, 14));
-        logButton.setBackground(new Color(45, 150, 255)); // Azul claro
-        logButton.setForeground(Color.WHITE);
-        logButton.setFocusPainted(false);
-        logButton.setBorderPainted(false);
-        logButton.setOpaque(true);
-        logButton.setAlignmentX(CENTER_ALIGNMENT);
-        logButton.addActionListener(getControler());
-        contentPane.add(logButton);
-
-        // Espaciado inferior
-        contentPane.add(Box.createVerticalStrut(20));
-    }
-
-    public void closeWindow() {
-        this.dispose();
-    }
-
-    private Controler getControler() {
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		correoArea = new JTextField();
+		correoArea.setBounds(162, 92, 96, 19);
+		contentPane.add(correoArea);
+		correoArea.setColumns(10);
+		correoArea.addActionListener(getControler());
+		
+		
+		passwordArea = new JTextField();
+		passwordArea.setBounds(162, 145, 96, 19);
+		contentPane.add(passwordArea);
+		passwordArea.setColumns(10);
+		passwordArea.addActionListener(getControler());
+		
+		logButton = new JButton("ACCEDER");
+		logButton.setBounds(162, 202, 96, 21);
+		contentPane.add(logButton);
+		logButton.addActionListener(getControler());
+		
+		
+		
+		JLabel lblNewLabel = new JLabel("Password");
+		lblNewLabel.setBounds(162, 131, 73, 13);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("email");
+		lblNewLabel_1.setBounds(162, 77, 45, 13);
+		contentPane.add(lblNewLabel_1);
+	}
+	
+	
+	public void closeWindow() {
+		this.dispose();
+	}
+	
+	private Controler getControler() {
         if (this.controler == null) {
             this.controler = new Controler();
         }
+
         return this.controler;
     }
-
-    private class Controler implements ActionListener {
+	
+	private class Controler implements ActionListener {
         private Controler() {
         }
-
+        
         public void actionPerformed(ActionEvent e) {
-            if (e.getSource().equals(logButton)) {
-                // CHECKEAR Y PROCEDER CON EL LOGIN
-                String email = correoArea.getText();
-                String password = passwordArea.getText();
-
-                boolean logInCorrecto = GestorUsuarios.getGUsuarios().checkLogIn(email, password);
-                boolean esAdmin = GestorUsuarios.getGUsuarios().esAdmin(email);
-
-                if (logInCorrecto) {
-                    // PASA A MENU PRINCIPAL
-                    System.out.println("hago close y abro menu");
-                    closeWindow();
-
-                    IU_MENU iueli = new IU_MENU(email, esAdmin);
-                    iueli.run();
-                } else {
-                    // MOSTRAR PANTALLA DE ERROR
-                    System.out.println("hago close y abro error");
-                    closeWindow();
-                    IU_ERROR_LOGIN iueli = new IU_ERROR_LOGIN();
-                    iueli.run();
-                }
-            }
+        	if(e.getSource().equals(logButton)) {
+        		//CHECKEAR Y PROCEDER CON EL LOGIN
+        		
+        		String email = correoArea.getText();
+        		String password = passwordArea.getText();
+        		
+        		boolean logInCorrecto = GestorUsuarios.getGUsuarios().checkLogIn(email, password);
+   
+        		boolean esAdmin = GestorUsuarios.getGUsuarios().esAdmin(email);
+        		if(logInCorrecto) {
+        			//PASA A MENU PRINCIPAL
+        			System.out.println("hago close y abro menu");
+        			closeWindow();
+        			
+        			IU_MENU iueli = new IU_MENU(email,esAdmin);
+        			iueli.run();
+        		}
+        		else {
+        			//MOSTRAR PANTALLA DE ERROR
+        			System.out.println("hago close y abro error");
+        			closeWindow();
+        			IU_ERROR_LOGIN iueli = new IU_ERROR_LOGIN();
+        			iueli.run();
+        		}
+        		
+        	}
         }
     }
 }

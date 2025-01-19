@@ -23,6 +23,7 @@ public class IU_MOD_DATOS extends JFrame {
 	private JButton confirmCambios;
     private Controler controler = null;
     private String correoUsuario;
+    private boolean esAdmin;
 
     
 	/**
@@ -30,7 +31,7 @@ public class IU_MOD_DATOS extends JFrame {
 	 */
 	public void run() {
 		try {
-			IU_ERROR_LOGIN frame = new IU_ERROR_LOGIN();
+			IU_MOD_DATOS frame = new IU_MOD_DATOS(correoUsuario, esAdmin);
 			frame.setVisible(true);
 		} catch (Exception e) {
 				e.printStackTrace();
@@ -40,8 +41,9 @@ public class IU_MOD_DATOS extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public IU_MOD_DATOS(String correo) {
+	public IU_MOD_DATOS(String correo, boolean esAdmin) {
 		this.correoUsuario = correo;
+		this.esAdmin = esAdmin;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -62,6 +64,7 @@ public class IU_MOD_DATOS extends JFrame {
 		
 		confirmCambios = new JButton("CONFIRM");
 		confirmCambios.setBounds(147, 211, 96, 21);
+		confirmCambios.addActionListener(getControler());
 		contentPane.add(confirmCambios);
 		
 		JLabel lblNewLabel = new JLabel("nombre");
@@ -96,7 +99,7 @@ public class IU_MOD_DATOS extends JFrame {
         		
         		GestorUsuarios.getGUsuarios().modificarDatosUser(correoUsuario, nombreN, contrasenaN);
         		closeWindow();
-        		IU_MENU ium = new IU_MENU(correoUsuario, GestorUsuarios.getGUsuarios().esAdmin(correoUsuario));
+        		IU_MENU ium = new IU_MENU(correoUsuario,esAdmin );
         		ium.run();
         	}
         }

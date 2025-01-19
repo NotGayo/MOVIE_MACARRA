@@ -51,22 +51,21 @@ public class IU_SOLICITUDES_REG extends JFrame {
 		setContentPane(contentPane);
 		
 		DefaultListModel<String> listModel = new DefaultListModel<>();
-		JList<String> listaSolicitudes = new JList<>(listModel);
+		listaSolicitudes = new JList<>(listModel);
 		ArrayList<Usuario> listaCompleta = GestorUsuarios.getGUsuarios().getListaUsuarios();
 		
 		for(Usuario u : listaCompleta) {
-			if(!u.esValidoUsuario()) {
+			if(!u.estaAceptado()) {
 				listModel.addElement(u.getCorreo());
 			}
 		}
 		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		
-		listaSolicitudes.setModel(listModel);
 		listaSolicitudes.setBounds(1, 1, 1, 1);
+		listaSolicitudes.setModel(listModel);
 		contentPane.add(new JScrollPane(listaSolicitudes));
 		
-		JButton aceptarSolicitudBtn = new JButton("ACEPTAR");
+		aceptarSolicitudBtn = new JButton("ACEPTAR");
 		aceptarSolicitudBtn.addActionListener(getControler());
 		contentPane.add(aceptarSolicitudBtn);
 		
@@ -88,12 +87,14 @@ public class IU_SOLICITUDES_REG extends JFrame {
         }
         
         public void actionPerformed(ActionEvent e) {
+        	
         	if(e.getSource().equals(aceptarSolicitudBtn)) {
-        		System.out.println(listaSolicitudes.getSelectedValue());
-        		GestorUsuarios.getGUsuarios().marcarRegistrado(listaSolicitudes.getSelectedValue(),correoAdmin);
+        		String aceptado = listaSolicitudes.getSelectedValue();
+        		closeWindow();
+        		GestorUsuarios.getGUsuarios().marcarRegistrado(aceptado,correoAdmin);
         		IU_SOLICITUDES_REG iusr = new IU_SOLICITUDES_REG(correoAdmin);
         		iusr.run();
-        		closeWindow();
+        		
         	}
         }
     }

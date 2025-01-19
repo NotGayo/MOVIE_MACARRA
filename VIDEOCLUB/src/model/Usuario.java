@@ -10,12 +10,12 @@ public class Usuario {
     private String contrasena;
     private String nombre;
     private boolean esAdmin;
-    private List<Alquiler> susAlquileres;
-    private List<Valoracion> susValoraciones;
-    private List<Pelicula> susAnadidasP;
-    private List<Pelicula> susEliminadasP;
-    private List<Usuario> susEliminadosU;
-    private List<Usuario> susAceptadosU;
+    private List<Alquiler> susAlquileres = new ArrayList<Alquiler>();
+    private List<Valoracion> susValoraciones = new ArrayList<Valoracion>();;
+    private List<Pelicula> susAnadidasP = new ArrayList<Pelicula>();;
+    private List<Pelicula> susEliminadasP = new ArrayList<Pelicula>();;
+    private List<Usuario> susEliminadosU = new ArrayList<Usuario>();;
+    private List<Usuario> susAceptadosU = new ArrayList<Usuario>();;
     private boolean esAceptado = false;
     
     
@@ -25,20 +25,23 @@ public class Usuario {
     	this.contrasena = contrasena;
     	this.fechaNacimiento = fechaN;
     	this.esAdmin = false;
-    	this.susAlquileres = new ArrayList<>();
-    	this.susValoraciones = new ArrayList<>();
-    	this.susAnadidasP = new ArrayList<>();
-        this.susEliminadasP = new ArrayList<>();
-    	this.susEliminadosU = new ArrayList<>();
-    	this.susAceptadosU = new ArrayList<>();
     	
     }
+    
+    public void borrarPeliPorObjeto(Pelicula unaP) {
+		for(Alquiler a : susAlquileres) {
+			if(a.getPelicula().equals(unaP)) {
+				susAlquileres.remove(a);
+			}
+		}
+	}
     public void marcarRegistrado() {
     	this.esAceptado = true;
     }
-    public boolean esValidoUsuario() {
+    public boolean estaAceptado() {
     	return this.esAceptado;
     }
+    
     
     // Getters y setters
     public int getCodUsuario() {
@@ -139,15 +142,12 @@ public class Usuario {
     
     public boolean laHeAlquilado(int codPelicula) {
     	boolean alquilada = false;
-    	if(this.susAlquileres == null) {
-    		
-    	}
-    		for (Alquiler al : this.susAlquileres) {
-    			if (al.getPelicula().getCodPeli() == codPelicula) {
-    				alquilada = true;
-    				break;
-    			}
+    	for (Alquiler al : this.susAlquileres) {
+    		if (al.getPelicula().getCodPeli() == codPelicula) {
+    			alquilada = true;
+    			break;
     		}
+    	}
     	return alquilada;
     }
 	public void anadirAlquiler(Alquiler alquiler) {
