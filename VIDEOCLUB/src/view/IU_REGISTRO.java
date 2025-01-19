@@ -129,7 +129,7 @@ public class IU_REGISTRO extends JFrame {
         			//pasar al menu
         			System.out.println("hago close y abro menu");
         			closeWindow();
-        			IU_MENU iueli = new IU_MENU(correoR);
+        			IU_MENU iueli = new IU_MENU(correoR, false);
         			iueli.run();
         		}
         		else {

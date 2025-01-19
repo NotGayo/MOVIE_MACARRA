@@ -25,26 +25,16 @@ public class IU_ADMIN_BORRAR_USUARIO extends JFrame {
     private Controler controler = null;
     JList<String> listaUsuarios;
     ArrayList<Usuario> listaCompleta;
+    private String correoAdm;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					IU_ADMIN_BORRAR_USUARIO frame = new IU_ADMIN_BORRAR_USUARIO();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 	
 	public void run() {
 		try {
-			IU_ADMIN_BORRAR_USUARIO frame = new IU_ADMIN_BORRAR_USUARIO();
+			IU_ADMIN_BORRAR_USUARIO frame = new IU_ADMIN_BORRAR_USUARIO(correoAdm);
 			frame.setVisible(true);
 		} catch (Exception e) {
 				e.printStackTrace();
@@ -54,7 +44,8 @@ public class IU_ADMIN_BORRAR_USUARIO extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public IU_ADMIN_BORRAR_USUARIO() {
+	public IU_ADMIN_BORRAR_USUARIO(String pCorreo) {
+		this.correoAdm = pCorreo;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -110,7 +101,7 @@ public class IU_ADMIN_BORRAR_USUARIO extends JFrame {
         		
         		closeWindow();
         		
-        		GestorUsuarios.getGUsuarios().eliminarUsuario(correoUser);
+        		GestorUsuarios.getGUsuarios().eliminarUsuario(correoUser,correoAdm);
         		run();
         		
         	}

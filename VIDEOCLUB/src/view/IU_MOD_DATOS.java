@@ -22,7 +22,7 @@ public class IU_MOD_DATOS extends JFrame {
 	private JTextField newContrasena;
 	private JButton confirmCambios;
     private Controler controler = null;
-    String correoUsuario;
+    private String correoUsuario;
 
     
 	/**
@@ -95,6 +95,9 @@ public class IU_MOD_DATOS extends JFrame {
         		String nombreN = newNombre.getText();
         		
         		GestorUsuarios.getGUsuarios().modificarDatosUser(correoUsuario, nombreN, contrasenaN);
+        		closeWindow();
+        		IU_MENU ium = new IU_MENU(correoUsuario, GestorUsuarios.getGUsuarios().esAdmin(correoUsuario));
+        		ium.run();
         	}
         }
     }

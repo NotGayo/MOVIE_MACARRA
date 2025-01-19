@@ -14,7 +14,6 @@ public class VideoClub {
 	
 	private VideoClub() {
 		DatabaseSetup.createTables();
-		DatabaseInsertion.insertarUsuario("first", "first@firstmai.first", "first123",new Date(1,1,1));
 	}
 	
 	public static VideoClub getVC() {
@@ -24,4 +23,5 @@ public class VideoClub {
 	public void startVC() {
 		
 	}
+	
 }

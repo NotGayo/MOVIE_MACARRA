@@ -24,13 +24,14 @@ public class IU_SOLICITUDES_REG extends JFrame {
 	private JList<String> listaSolicitudes;
     private Controler controler = null;
     JButton aceptarSolicitudBtn;
+    private String correoAdmin;
 
 	/**
 	 * Launch the application.
 	 */
     public void run() {
 		try {
-			IU_ERROR_LOGIN frame = new IU_ERROR_LOGIN();
+			IU_SOLICITUDES_REG frame = new IU_SOLICITUDES_REG(correoAdmin);
 			frame.setVisible(true);
 		} catch (Exception e) {
 				e.printStackTrace();
@@ -40,7 +41,8 @@ public class IU_SOLICITUDES_REG extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public IU_SOLICITUDES_REG() {
+	public IU_SOLICITUDES_REG(String pCorreo) {
+		this.correoAdmin = pCorreo;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -88,8 +90,8 @@ public class IU_SOLICITUDES_REG extends JFrame {
         public void actionPerformed(ActionEvent e) {
         	if(e.getSource().equals(aceptarSolicitudBtn)) {
         		System.out.println(listaSolicitudes.getSelectedValue());
-        		GestorUsuarios.getGUsuarios().marcarRegistrado(listaSolicitudes.getSelectedValue());
-        		IU_SOLICITUDES_REG iusr = new IU_SOLICITUDES_REG();
+        		GestorUsuarios.getGUsuarios().marcarRegistrado(listaSolicitudes.getSelectedValue(),correoAdmin);
+        		IU_SOLICITUDES_REG iusr = new IU_SOLICITUDES_REG(correoAdmin);
         		iusr.run();
         		closeWindow();
         	}

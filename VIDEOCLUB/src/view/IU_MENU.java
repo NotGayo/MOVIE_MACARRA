@@ -21,16 +21,21 @@ public class IU_MENU extends JFrame {
     private JButton mrp;
     private JButton buscarPeli;
     private JButton actualizarDatos;
-    
+    private boolean esAdmin;
     private Controler controler = null;
     private String correo;
+    private JButton adm_soli;
+    private JButton adm_borrar;
+    private JButton adm_modus;
+    private JButton modus;
+
 
     /**
      * Launch the application.
      */
             public void run() {
                 try {
-                    IU_MENU frame = new IU_MENU(correo);
+                    IU_MENU frame = new IU_MENU(correo, esAdmin);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -41,10 +46,11 @@ public class IU_MENU extends JFrame {
     /**
      * Create the frame.
      */
-    public IU_MENU(String email) {
+    public IU_MENU(String email, boolean esAdmin) {
     	this.correo = email;
+    	this.esAdmin = esAdmin;
     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 850, 600);
 		contentPane = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) contentPane.getLayout();
 		flowLayout.setVgap(170);
@@ -65,8 +71,28 @@ public class IU_MENU extends JFrame {
 		contentPane.add(actualizarDatos);
         this.actualizarDatos.addActionListener(this.getControler());
 
-
-
+        if(esAdmin) {
+        	//btn solicitudes
+        	setContentPane(contentPane);
+            adm_soli = new JButton("SOLICITUDES");
+    		contentPane.add(adm_soli);
+            this.adm_soli.addActionListener(this.getControler());
+        	//btn borrar user
+            setContentPane(contentPane);
+            adm_borrar = new JButton("BORRAR USUARIOS");
+    		contentPane.add(adm_borrar);
+            this.adm_borrar.addActionListener(this.getControler());
+        	//modUsuario siendo admin
+            setContentPane(contentPane);
+            adm_modus = new JButton("MODIFICAR USERS");
+    		contentPane.add(adm_modus);
+            this.adm_modus.addActionListener(this.getControler());
+        }
+        //btn MOD DATOS USER
+        setContentPane(contentPane);
+        modus = new JButton("MODIFICAR MIS DATOS");
+		contentPane.add(modus);
+        this.modus.addActionListener(this.getControler());
 
 	}
 	
@@ -102,6 +128,31 @@ public class IU_MENU extends JFrame {
         	}
         	
         	if (e.getSource().equals(actualizarDatos)) {
+        		//iniciar una ventana de modificar datos
+        		closeWindow();
+        		IU_MOD_DATOS iumd = new IU_MOD_DATOS(correo);
+        		iumd.run();
+        	}
+        	if (e.getSource().equals(adm_soli)) {
+        		//iniciar una ventana de modificar datos
+        		closeWindow();
+        		IU_SOLICITUDES_REG iusr = new IU_SOLICITUDES_REG(correo);
+        		iusr.run();
+        	}
+        	if (e.getSource().equals(adm_borrar)) {
+        		//iniciar una ventana de modificar datos
+        		closeWindow();
+        		IU_ADMIN_BORRAR_USUARIO iumd = new IU_ADMIN_BORRAR_USUARIO(correo);
+        		iumd.run();
+        	}
+        	
+        	if (e.getSource().equals(adm_modus)) {
+        		//iniciar una ventana de modificar datos
+        		closeWindow();
+        		IU_ADMIN_MOD_USUARIO iumu = new IU_ADMIN_MOD_USUARIO(correo);
+        		iumu.run();
+        	}
+        	if (e.getSource().equals(modus)) {
         		//iniciar una ventana de modificar datos
         		closeWindow();
         		IU_MOD_DATOS iumd = new IU_MOD_DATOS(correo);

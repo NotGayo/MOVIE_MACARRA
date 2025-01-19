@@ -26,18 +26,36 @@ public class GestorUsuarios {
 	}
 	
 	
-	public void eliminarUsuario(String pCorreo) {
+	public void eliminarUsuario(String pCorreo, String correoAdm) {
 		Usuario unUs = null;
+		boolean marcado = false;
+		Usuario admin = null;
 		for(Usuario u : listaUsuarios) {
 			if(u.getCorreo().equalsIgnoreCase(pCorreo) && (listaUsuarios.indexOf(u) != listaUsuarios.size())) {
 				unUs = u;
 				
 			}
 		}
+		for(Usuario u2 : listaUsuarios) {
+			if(u2.getCorreo().equalsIgnoreCase(correoAdm)) {
+				admin = u2;
+			}
+		}
 		if(unUs != null) {
+			admin.getSusEliminadosU().add(unUs);
 			listaUsuarios.remove(unUs);
 			DatabaseDelete.borrarUsuario(pCorreo);
 		}
+	}
+	
+	
+	public boolean esAdmin(String pCorreo) {
+		for (Usuario u : listaUsuarios) {
+			if(u.getCorreo().equalsIgnoreCase(pCorreo)) {
+				return u.isEsAdmin();
+			}
+		}
+		return false;
 	}
 	
 	
@@ -56,12 +74,24 @@ public class GestorUsuarios {
 		}
 	}
 	
-	public void marcarRegistrado(String correo) {
+	public void marcarRegistrado(String correo, String correoAdm) {
+		boolean marcado = false;
+		Usuario admin = null;
+		Usuario unUsuario = null;
 		for(Usuario u : listaUsuarios) {
 			if(u.getCorreo().equalsIgnoreCase(correo)) {
-				u.marcarRegistrado();
+				marcado = true;
+				unUsuario = u;
+			}	
+		}
+		
+		for(Usuario u2 : listaUsuarios) {
+			if(u2.getCorreo().equalsIgnoreCase(correoAdm)) {
+				admin = u2;
 			}
 		}
+		unUsuario.marcarRegistrado();
+		admin.getSusAceptadosU().add(unUsuario);
 	}
 	
 	

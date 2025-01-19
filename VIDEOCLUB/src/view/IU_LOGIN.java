@@ -105,12 +105,14 @@ public class IU_LOGIN extends JFrame {
         		String password = passwordArea.getText();
         		
         		boolean logInCorrecto = GestorUsuarios.getGUsuarios().checkLogIn(email, password);
-        		System.out.println(logInCorrecto);
+   
+        		boolean esAdmin = GestorUsuarios.getGUsuarios().esAdmin(email);
         		if(logInCorrecto) {
         			//PASA A MENU PRINCIPAL
         			System.out.println("hago close y abro menu");
         			closeWindow();
-        			IU_MENU iueli = new IU_MENU(email);
+        			
+        			IU_MENU iueli = new IU_MENU(email,esAdmin);
         			iueli.run();
         		}
         		else {
